@@ -1,0 +1,73 @@
+<resources>
+    <!-- String used for major names -->
+    <string name="app_name">Fryzjer project</string>
+    <string name="database_name">FryzjerProjectDatabase</string>
+
+    <!-- String used for main menu -->
+    <string name="action_login">Zaloguj się</string>
+    <string name="action_register">Zarejestruj się</string>
+    <string name="action_logout">Wyloguj się</string>
+
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">Strona główna</string>
+    <string name="second_fragment_label">Nasze prace</string>
+    <string name="next">Zobacz nasze prace</string>
+    <string name="previous">Strona główna</string>
+
+    <!-- Strings used for client entity management -->
+    <string name="hint_client_name">Imię</string>
+    <string name="hint_client_surname">Nazwisko</string>
+    <string name="client_empty_not_saved">Klient niezapisany, zostawiono puste pola.</string>
+    <string name="client_added">Klient stworzony z powodzeniem</string>
+    <string name="client_edited">Klient edytowany z powodzeniem</string>
+
+    <!-- Strings used for appointment entity management -->
+    <string name="hint_appointment_name">Imię</string>
+    <string name="hint_appointment_surname">Nazwisko</string>
+    <string name="hint_appointment_date">Data</string>
+    <string name="appointment_empty_not_saved">Wizyta niezapisana, zostawiono puste pola.</string>
+    <string name="appointment_added">Wizyta stworzona z powodzeniem</string>
+    <string name="appointment_edited">Wizyta edytowana z powodzeniem</string>
+
+    <string name="button_save">Zapisz</string>
+
+    <!-- Strings used for login and register pages -->
+    <string name="login_page_title">Logowanie</string>
+    <string name="register_page_title">Rejestracja</string>
+    <string name="hint_login">Login</string>
+    <string name="hint_password">Hasło</string>
+    <string name="hint_repeatPassword">Powtórz hasło</string>
+    <string name="hint_name">Imię</string>
+    <string name="hint_surname">Nazwisko</string>
+    <string name="go_to_register">Nie masz konta?\nZarejestruj się!</string>
+    <string name="go_to_login">Masz już konto?\nZaloguj się!</string>
+    <string name="button_login">Zaloguj się</string>
+    <string name="button_register">Zarejestruj się</string>
+    <string name="login_successful">Zalogowano pomyślnie!</string>
+    <string name="login_error_empty_fields">Proszę uzupenić wszystkie pola!</string>
+    <string name="login_error_wrong_password">Hasło nie pasuje do loginu!</string>
+    <string name="login_error_login_not_found">Nie znaleziono konta z podanym loginem!</string>
+    <string name="register_successful">Zarejestrowano pomyślnie!\nProszę się zalogować.</string>
+    <string name="register_error_pass_does_not_match_repeatPass">Hasła nie są takie same!</string>
+    <string name="register_error_empty_fields">Proszę uzupenić wszystkie pola!</string>
+    <string name="logout_successful">Wylogowano pomyślnie!</string>
+
+
+    <string name="app_description">
+        Witaj w naszym wyjątkowym salonie fryzjerskim, gdzie sztuka i pasja spotykają się w każdym włosie! Nasza aplikacja mobilna to brama do świata niezrównanej elegancji i doskonałej pielęgnacji włosów. Odkryj unikalne doświadczenie w dziedzinie fryzjerstwa, które łączy nowoczesne trendy ze starannie utrzymanym stylem.\n
+        \n
+        Co oferujemy:\n
+        \n
+        Doświadczona Kadra Profesjonalistów: Nasz zespół to grupa utalentowanych stylistów, gotowych spełnić Twoje najbardziej wyrafinowane oczekiwania. Zawsze śledzimy najnowsze trendy, abyś zawsze wyglądał/a modnie i stylowo.\n
+        \n
+        Indywidualne Podejście: Każdy klient to dla nas wyjątkowy, dlatego zawsze słuchamy Twoich potrzeb i preferencji. Indywidualne podejście to klucz do osiągnięcia doskonałego efektu, dostosowanego do Twojego stylu życia i osobowości.\n
+        \n
+        Nowoczesne Technologie: Wykorzystujemy najnowsze technologie i innowacyjne metody fryzjerskie, aby zapewnić Ci usługi najwyższej jakości. Bezpieczne farby do włosów, najnowsze urządzenia do stylizacji - wszystko po to, abyś czuł/a się wyjątkowo.\n
+        \n
+        Relaksująca Atmosfera: Nasz salon to miejsce, gdzie luksus spotyka się z przyjemnością. Zrelaksuj się w naszej eleganckiej przestrzeni, zaprojektowanej tak, abyś poczuł/a się komfortowo i odprężająco.\n
+        \n
+        Szeroki Zakres Usług: Oferujemy kompleksową gamę usług, od nowoczesnych cięć i kolorów po profesjonalne zabiegi pielęgnacyjne. Niezależnie od tego, czy pragniesz świeżego looku czy intensywnej regeneracji włosów - jesteśmy tutaj, aby spełnić Twoje oczekiwania.\n
+        \n
+        Przekrocz progi naszego salonu fryzjerskiego i odkryj, jak możemy podkreślić Twoją wyjątkową urodę. Ściślej z nami zwiąż się poprzez naszą aplikację mobilną, aby łatwo umawiać się na wizyty, przeglądać nasze portfolio, oraz być na bieżąco z najnowszymi trendami i promocjami. Z nami Twoje włosy staną się dziełem sztuki!\n
+    </string>
+</resources>

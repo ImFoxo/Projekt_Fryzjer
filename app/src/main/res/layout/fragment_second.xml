@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SecondFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/button_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/previous"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/imageButtonFb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#0000"
+            android:src="@drawable/icon_fb"
+            app:layout_constraintEnd_toStartOf="@+id/button_second"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_second"
+            android:layout_marginVertical="@dimen/small_padding" />
+
+        <ImageButton
+            android:id="@+id/imageButtonIg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#0000"
+            android:src="@drawable/icon_ig"
+            app:layout_constraintEnd_toStartOf="@+id/imageButtonTt"
+            app:layout_constraintStart_toEndOf="@+id/imageButtonFb"
+            app:layout_constraintTop_toBottomOf="@+id/button_second"
+            android:layout_marginVertical="@dimen/small_padding" />
+
+        <ImageButton
+            android:id="@+id/imageButtonTt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#0000"
+            android:src="@drawable/icon_tt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/button_second"
+            app:layout_constraintTop_toBottomOf="@+id/button_second"
+            android:layout_marginVertical="@dimen/small_padding" />
+
+        <ImageView
+            android:id="@+id/imageViewFryzjer1"
+            android:layout_width="match_parent"
+            android:layout_height="223dp"
+            android:layout_marginTop="@dimen/huge_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageButtonIg"
+            app:srcCompat="@drawable/fryzjer1" />
+
+        <ImageView
+            android:id="@+id/imageViewFryzjer2"
+            android:layout_width="match_parent"
+            android:layout_height="223dp"
+            android:layout_marginTop="@dimen/big_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewFryzjer1"
+            app:srcCompat="@drawable/fryzjer2" />
+
+        <ImageView
+            android:id="@+id/imageViewFryzjer3"
+            android:layout_width="match_parent"
+            android:layout_height="223dp"
+            android:layout_marginTop="@dimen/big_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewFryzjer2"
+            app:srcCompat="@drawable/fryzjer3"/>
+
+        <ImageView
+            android:id="@+id/imageViewFryzjer4"
+            android:layout_width="match_parent"
+            android:layout_height="223dp"
+            android:layout_marginTop="@dimen/big_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewFryzjer3"
+            app:srcCompat="@drawable/fryzjer4" />
+
+        <ImageView
+            android:id="@+id/imageViewFryzjer5"
+            android:layout_width="match_parent"
+            android:layout_height="223dp"
+            android:layout_marginTop="@dimen/big_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageViewFryzjer4"
+            app:srcCompat="@drawable/fryzjer5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
