@@ -8,16 +8,19 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
 import com.example.projektfryzjer.Database.Helpers.DatabaseHelper;
 import com.example.projektfryzjer.Database.Helpers.SessionManager;
 import com.example.projektfryzjer.Database.MyDatabase;
 import com.example.projektfryzjer.MainActivity;
+import com.example.projektfryzjer.Models.User;
 import com.example.projektfryzjer.Models.UserFieldType;
 import com.example.projektfryzjer.R;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 

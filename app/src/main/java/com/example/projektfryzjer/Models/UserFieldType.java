@@ -3,8 +3,10 @@ package com.example.projektfryzjer.Models;
 public enum UserFieldType {
     USERNAME,
     EMAIL,
-    FIRST_NAME,
-    LAST_NAME,
+    NAME,
+    LASTNAME,
+    FULLNAME,
     PASSWORD,
-    PASSWORD_SALT
+    PASSWORD_SALT,
+    ISEMPLOYEE
 }

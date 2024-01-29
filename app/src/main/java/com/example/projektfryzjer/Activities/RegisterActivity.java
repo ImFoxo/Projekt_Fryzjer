@@ -13,7 +13,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.projektfryzjer.Database.Helpers.DatabaseHelper;
 import com.example.projektfryzjer.Database.MyDatabase;
-import com.example.projektfryzjer.MainActivity;
 import com.example.projektfryzjer.Models.User;
 import com.example.projektfryzjer.R;
 
@@ -96,7 +95,8 @@ public class RegisterActivity extends AppCompatActivity {
             newUser.setPasswordSalt(passwordSalt);
             DatabaseHelper databaseHelper = new DatabaseHelper(this);
             MyDatabase db = databaseHelper.getDatabase(getApplicationContext());
-            db.userDao().insertUser(newUser);
+            db.userDao().insert(newUser);
+            db.userDao().findAllToList();
             return true;
         } else {
             Toast.makeText(

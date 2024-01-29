@@ -7,6 +7,7 @@
     <string name="action_login">Zaloguj się</string>
     <string name="action_register">Zarejestruj się</string>
     <string name="action_logout">Wyloguj się</string>
+    <string name="action_userList">Zarządzaj użytkownikami</string>
 
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">Strona główna</string>
@@ -14,20 +15,31 @@
     <string name="next">Zobacz nasze prace</string>
     <string name="previous">Strona główna</string>
 
-    <!-- Strings used for client entity management -->
-    <string name="hint_client_name">Imię</string>
-    <string name="hint_client_surname">Nazwisko</string>
-    <string name="client_empty_not_saved">Klient niezapisany, zostawiono puste pola.</string>
-    <string name="client_added">Klient stworzony z powodzeniem</string>
-    <string name="client_edited">Klient edytowany z powodzeniem</string>
+    <!-- Strings used for user entity management -->
+    <string name="user_employee_granted">Nadano uprawnienia pracownika użytkownikowi\u0020</string>
+    <string name="user_employee_revoked">Zabrano uprawnienia pracownika użytkownikowi\u0020</string>
 
     <!-- Strings used for appointment entity management -->
     <string name="hint_appointment_name">Imię</string>
-    <string name="hint_appointment_surname">Nazwisko</string>
+    <string name="hint_appointment_lastName">Nazwisko</string>
     <string name="hint_appointment_date">Data</string>
+    <string name="appointment_button_date">Wybierz datę</string>
+    <string name="appointment_button_time">Wybierz godzinę</string>
+    <string name="appointment_button_camera">Dodaj zdjęcie</string>
     <string name="appointment_empty_not_saved">Wizyta niezapisana, zostawiono puste pola.</string>
     <string name="appointment_added">Wizyta stworzona z powodzeniem</string>
     <string name="appointment_edited">Wizyta edytowana z powodzeniem</string>
+    <string name="appointment_assign_employee">Przypisano cię do wizyty użytkownika\u0020</string>
+    <string name="appointment_remove_employee">Odpisano cię od wizyty użytkownika\u0020</string>
+    <string name="appointment_dialog_title">Wizyta</string>
+    <string name="appointment_dialog_message">Czy na pewno chcesz odwołać wyizytę?</string>
+    <string name="appointment_dialog_confirm">Odwołaj wizytę</string>
+    <string name="appointment_dialog_cancel">Anuluj</string>
+    <string name="appointment_dialog_emp_assign_message">Czy na pewno chcesz, aby przypisano cię do wybranej wizyty?</string>
+    <string name="appointment_dialog_emp_remove_message">Czy na pewno chcesz, aby odpisano cię od wybranej wizyty?</string>
+    <string name="appointment_dialog_emp_assign_confirm">Przypisz mnie</string>
+    <string name="appointment_dialog_emp_remove_confirm">Odpisz mnie</string>
+    <string name="appointment_dialog_emp_assign_cancel">Anuluj</string>
 
     <string name="button_save">Zapisz</string>
 
@@ -38,7 +50,7 @@
     <string name="hint_password">Hasło</string>
     <string name="hint_repeatPassword">Powtórz hasło</string>
     <string name="hint_name">Imię</string>
-    <string name="hint_surname">Nazwisko</string>
+    <string name="hint_lastName">Nazwisko</string>
     <string name="go_to_register">Nie masz konta?\nZarejestruj się!</string>
     <string name="go_to_login">Masz już konto?\nZaloguj się!</string>
     <string name="button_login">Zaloguj się</string>
@@ -52,6 +64,8 @@
     <string name="register_error_empty_fields">Proszę uzupenić wszystkie pola!</string>
     <string name="logout_successful">Wylogowano pomyślnie!</string>
 
+    <!-- String used for main page fab -->
+    <string name="fab_text">Wizyty</string>
 
     <string name="app_description">
         Witaj w naszym wyjątkowym salonie fryzjerskim, gdzie sztuka i pasja spotykają się w każdym włosie! Nasza aplikacja mobilna to brama do świata niezrównanej elegancji i doskonałej pielęgnacji włosów. Odkryj unikalne doświadczenie w dziedzinie fryzjerstwa, które łączy nowoczesne trendy ze starannie utrzymanym stylem.\n

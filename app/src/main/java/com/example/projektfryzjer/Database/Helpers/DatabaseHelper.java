@@ -42,12 +42,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         User foundUser = myDatabase.userDao().findByUsername(inputUsername);
         if(foundUser != null) {
             switch (userFieldType) {
+                case NAME:
+                    return foundUser.getFirstName();
+                case LASTNAME:
+                    return foundUser.getLastName();
+                case FULLNAME:
+                    return foundUser.getFirstName() + "\n" + foundUser.getLastName();
                 case PASSWORD:
-                    Toast.makeText(context, foundUser.toString(), Toast.LENGTH_LONG);
                     return foundUser.getPassword();
                 case PASSWORD_SALT:
-                    Toast.makeText(context, foundUser.toString(), Toast.LENGTH_LONG);
                     return foundUser.getPasswordSalt();
+                case ISEMPLOYEE:
+                    return String.valueOf(foundUser.isEmployee());
             }
         }
         Toast.makeText(

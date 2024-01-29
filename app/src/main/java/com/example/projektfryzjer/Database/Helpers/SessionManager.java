@@ -10,28 +10,39 @@ import com.example.projektfryzjer.Models.User;
 
 public class SessionManager {
     private SharedPreferences.Editor isLoggedInEditor;
-    private SharedPreferences.Editor userLoggedInEditor;
+    private SharedPreferences.Editor userIdLoggedInEditor;
+    private SharedPreferences.Editor userNameLoggedInEditor;
     private SharedPreferences prefLogin;
     private String KEY_IS_LOGGEDIN = "isLoggedIn";
     private String PREFLOGIN_NAME = "AndroidLogin";
-    private SharedPreferences prefUser;
-    private String KEY_LOGGED_USER = "loggedUser";
-    private String PREFUSER_NAME = "AndroidLoggedUser";
+    private SharedPreferences prefUserId;
+    private String KEY_LOGGED_USERID = "loggedUserId";
+    private String PREFUSERID_NAME = "AndroidLoggedUserId";
+    private SharedPreferences prefUsername;
+    private String KEY_LOGGED_USERNAME = "loggedUsername";
+    private String PREFUSERNAME_NAME = "AndroidLoggedUsername";
     private int PRIVATE_MODE = 0;
     public SessionManager(Context context){
         prefLogin = context.getSharedPreferences(PREFLOGIN_NAME, PRIVATE_MODE);
         isLoggedInEditor = prefLogin.edit();
-        prefUser = context.getSharedPreferences(PREFUSER_NAME, PRIVATE_MODE);
-        userLoggedInEditor = prefUser.edit();
+        prefUserId = context.getSharedPreferences(PREFUSERID_NAME, PRIVATE_MODE);
+        userIdLoggedInEditor = prefUserId.edit();
+        prefUsername = context.getSharedPreferences(PREFUSERNAME_NAME, PRIVATE_MODE);
+        userNameLoggedInEditor = prefUsername.edit();
     }
     public void setLogin(boolean isLoggedIn, User user){
         isLoggedInEditor.putBoolean(KEY_IS_LOGGEDIN, isLoggedIn);
         isLoggedInEditor.commit();
-        if (user != null)
-            userLoggedInEditor.putInt(KEY_LOGGED_USER, user.getUserId());
-        else
-            userLoggedInEditor.putInt(KEY_LOGGED_USER, 0);
-        userLoggedInEditor.commit();
+        if (user != null) {
+            userIdLoggedInEditor.putInt(KEY_LOGGED_USERID, user.getUserId());
+            userNameLoggedInEditor.putString(KEY_LOGGED_USERNAME, user.getUsername());
+        }
+        else {
+            userIdLoggedInEditor.putInt(KEY_LOGGED_USERID, 0);
+            userNameLoggedInEditor.putString(KEY_LOGGED_USERNAME, null);
+        }
+        userIdLoggedInEditor.commit();
+        userNameLoggedInEditor.commit();
         Log.d(TAG, "User login session modified");
     }
     public boolean isLoggedIn(){
@@ -39,6 +50,9 @@ public class SessionManager {
     }
 
     public int loggedInUserId(){
-        return prefUser.getInt(KEY_LOGGED_USER, 0);
+        return prefUserId.getInt(KEY_LOGGED_USERID, 0);
+    }
+    public String loggedInUsername() {
+        return prefUsername.getString(KEY_LOGGED_USERNAME, null);
     }
 }

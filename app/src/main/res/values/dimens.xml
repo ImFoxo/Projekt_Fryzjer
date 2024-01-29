@@ -3,4 +3,5 @@
     <dimen name="small_padding">6dp</dimen>
     <dimen name="big_padding">16dp</dimen>
     <dimen name="huge_padding">32dp</dimen>
+    <dimen name="enormous_padding">52dp</dimen>
 </resources>

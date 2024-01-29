@@ -2,11 +2,14 @@ package com.example.projektfryzjer.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,19 +18,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.projektfryzjer.Database.Helpers.Converters;
+import com.example.projektfryzjer.Database.Helpers.DatabaseHelper;
 import com.example.projektfryzjer.Database.Helpers.SessionManager;
 import com.example.projektfryzjer.Models.Appointment;
+import com.example.projektfryzjer.Models.UserFieldType;
 import com.example.projektfryzjer.R;
 import com.example.projektfryzjer.ViewModels.AppointmentViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class AppointmentListActivity extends AppCompatActivity {
@@ -36,6 +41,7 @@ public class AppointmentListActivity extends AppCompatActivity {
     private static final int EDIT_APPOINTMENT_ACTIVITY_REQUEST_CODE = 2;
     private Appointment editedAppointment = null;
     private SessionManager sessionManager;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +57,11 @@ public class AppointmentListActivity extends AppCompatActivity {
         appointmentViewModel = new ViewModelProvider(this).get(AppointmentViewModel.class);
         appointmentViewModel.findAll().observe(this, adapter::setAppointments);
 
+        context = this;
         sessionManager = new SessionManager(this);
         if (!sessionManager.isLoggedIn()) {
             startActivity(new Intent(AppointmentListActivity.this, LoginActivity.class));
+            finish();
         }
 
         FloatingActionButton addBookButton = findViewById(R.id.add_appointment_button);
@@ -95,7 +103,12 @@ public class AppointmentListActivity extends AppCompatActivity {
 
         if (requestCode == NEW_APPOINTMENT_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK)
         {
-            Appointment appointment = new Appointment(data.getStringExtra(AppointmentEditActivity.EXTRA_EDIT_APPOINTMENT_DATE), data.getStringExtra((AppointmentEditActivity.EXTRA_EDIT_APPOINTMENT_TIME)), data.getIntExtra(AppointmentEditActivity.EXTRA_EDIT_APPOINTMENT_USERID, 0));
+            String clientFullName = DatabaseHelper.getUserFieldSQLQuery(context, UserFieldType.FULLNAME, sessionManager.loggedInUsername());
+            String date = data.getStringExtra(AppointmentEditActivity.EXTRA_EDIT_APPOINTMENT_DATE);
+            String time = data.getStringExtra((AppointmentEditActivity.EXTRA_EDIT_APPOINTMENT_TIME));
+            int userId = data.getIntExtra(AppointmentEditActivity.EXTRA_EDIT_APPOINTMENT_USERID, 0);
+            String imgAsString = data.getStringExtra((AppointmentEditActivity.EXTRA_EDIT_APPOINTMENT_PICTURE));
+            Appointment appointment = new Appointment(date, time, userId, clientFullName, imgAsString);
             appointmentViewModel.insert(appointment);
             Snackbar.make(findViewById(R.id.coordinator_layout), getString(R.string.appointment_added), Snackbar.LENGTH_LONG).show();
         }
@@ -103,7 +116,7 @@ public class AppointmentListActivity extends AppCompatActivity {
         {
             editedAppointment.setDate(data.getStringExtra(AppointmentEditActivity.EXTRA_EDIT_APPOINTMENT_DATE));
             editedAppointment.setTime(data.getStringExtra(AppointmentEditActivity.EXTRA_EDIT_APPOINTMENT_TIME));
-//            editedAppointment.setAppointmentId();
+            editedAppointment.setImgAsString(data.getStringExtra((AppointmentEditActivity.EXTRA_EDIT_APPOINTMENT_PICTURE)));
             appointmentViewModel.update(editedAppointment);
             Snackbar.make(findViewById(R.id.coordinator_layout), getString(R.string.appointment_edited), Snackbar.LENGTH_LONG).show();
         }
@@ -114,6 +127,8 @@ public class AppointmentListActivity extends AppCompatActivity {
     private class AppointmentHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
         private TextView appointmentDateTextView;
         private TextView appointmentTimeTextView;
+        private TextView appointmentEmployeeTextView;
+        private ImageView appointmentPictureImageView;
         private Appointment appointment;
 
         public AppointmentHolder(LayoutInflater inflater, ViewGroup parent)
@@ -124,29 +139,33 @@ public class AppointmentListActivity extends AppCompatActivity {
 
             appointmentDateTextView = itemView.findViewById(R.id.appointment_item_date);
             appointmentTimeTextView = itemView.findViewById(R.id.appointment_item_time);
+            appointmentEmployeeTextView = itemView.findViewById(R.id.appointment_item_employee);
+            appointmentPictureImageView = itemView.findViewById(R.id.appointment_item_picture);
         }
 
         public void bind(Appointment appointment)
         {
             this.appointment = appointment;
-            Log.d("Custom", "bind " + appointment.getClientName());
-            appointmentDateTextView.setText("Data: " + appointment.getDate());
-            appointmentTimeTextView.setText("Godzina: " + appointment.getTime());
+            appointmentDateTextView.setText("Data:\n" + appointment.getDate());
+            appointmentTimeTextView.setText("Godzina:\n" + appointment.getTime());
+            appointmentEmployeeTextView.setText("Pracownik:\n" + appointment.getEmployeeFullName());
+            appointmentPictureImageView.setImageBitmap(Converters.base64ToBitmap(appointment.getImgAsString()));
         }
 
         @Override
         public void onClick(View v) {
             editedAppointment = appointment;
-            Log.d("Click", "OnClick" + appointment.getClientName());
+            Log.d("Click", "OnClick" + appointment.getClientFullName());
             Intent intent = new Intent(AppointmentListActivity.this, AppointmentEditActivity.class);
             intent.putExtra(AppointmentEditActivity.EXTRA_EDIT_APPOINTMENT_DATE, appointment.getDate());
             intent.putExtra(AppointmentEditActivity.EXTRA_EDIT_APPOINTMENT_TIME, appointment.getTime());
+            intent.putExtra(AppointmentEditActivity.EXTRA_EDIT_APPOINTMENT_PICTURE, appointment.getImgAsString());
             startActivityForResult(intent, EDIT_APPOINTMENT_ACTIVITY_REQUEST_CODE);
         }
 
         @Override
         public boolean onLongClick(View v) {
-            appointmentViewModel.delete(appointment);
+            createAlertDialogForAppointmentDelete(appointment);
             return false;
         }
     }
@@ -182,12 +201,32 @@ public class AppointmentListActivity extends AppCompatActivity {
         void setAppointments(List<Appointment> appointments) {
             List<Appointment> userAppointments = new ArrayList<>();
             for (Appointment app: appointments) {
-                if (app.getUserId() == sessionManager.loggedInUserId()) {
+                if (app.getClientId() == sessionManager.loggedInUserId()) {
                     userAppointments.add(new Appointment(app));
                 }
             }
             this.appointments = userAppointments;
             notifyDataSetChanged();
         }
+    }
+
+    private void createAlertDialogForAppointmentDelete(Appointment appointment) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(AppointmentListActivity.this);
+
+        builder.setMessage(R.string.appointment_dialog_message);
+        builder.setTitle(R.string.appointment_dialog_title);
+
+        builder.setCancelable(false);
+
+        builder.setPositiveButton(R.string.appointment_dialog_confirm, (DialogInterface.OnClickListener) (dialog, which) -> {
+            appointmentViewModel.delete(appointment);
+        });
+
+        builder.setNegativeButton(R.string.appointment_dialog_cancel, (DialogInterface.OnClickListener) (dialog, which) -> {
+            dialog.cancel();
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }

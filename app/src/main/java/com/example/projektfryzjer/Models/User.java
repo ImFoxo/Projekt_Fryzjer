@@ -3,7 +3,10 @@ package com.example.projektfryzjer.Models;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
+
+import org.mindrot.jbcrypt.BCrypt;
 
 @Entity(tableName="user")
 public class User {
@@ -20,6 +23,9 @@ public class User {
     @ColumnInfo(name="last_name")
     @NonNull
     private String lastName;
+    @ColumnInfo(name="is_employee")
+    @NonNull
+    private boolean isEmployee;
     @ColumnInfo(name="password")
     @NonNull
     private String password;
@@ -27,6 +33,27 @@ public class User {
     @NonNull
     private String passwordSalt;
     public User() {
+    }
+
+    @Ignore
+    public static final int NO_EMPLOYEE = 2; // id 2 is reserved for placeholder employee which signals, that no real employee is assigned
+
+    @Ignore
+    public User(String username, String firstName, String lastName, boolean isEmployee, String password){
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.isEmployee = isEmployee;
+
+        String passwordSalt = BCrypt.gensalt();
+        String hashedPassword = BCrypt.hashpw(password, passwordSalt);
+        this.password = hashedPassword;
+        this.passwordSalt = passwordSalt;
+    }
+
+    @Ignore
+    public String getFullname () {
+        return firstName + " " + lastName;
     }
 
     // Getters Setters
@@ -63,6 +90,14 @@ public class User {
 
     public void setLastName(@NonNull String lastName) {
         this.lastName = lastName;
+    }
+
+    public boolean isEmployee() {
+        return isEmployee;
+    }
+
+    public void setEmployee(boolean employee) {
+        isEmployee = employee;
     }
 
     @NonNull
